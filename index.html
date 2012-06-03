@@ -1,14 +1,22 @@
-﻿<!DOCTYPE> //aiboy
+﻿<!DOCTYPE>
 <html>
 <head>
     <title>Runes Example</title>
-    <script src="script/runes.js" type="text/javascript"></script>
-    <script src="script/preprocession/runes.lexer.js" type="text/javascript"></script>
-    <script src="script/preprocession/runes.lexer.es3.js" type="text/javascript"></script>
+    <script type="text/javascript" src="script/runes.js"></script>
+
+    <script type="text/javascript" src="script/preprocession/runes.lexer.js"></script>
+    <script type="text/javascript" src="script/preprocession/runes.lexer.es3.js"></script>
+
+    <script type="text/javascript" src="script/preprocession/runes.parser.js"></script>
+    <script type="text/javascript" src="script/preprocession/runes.parser.es3.js"></script>
+    
+    <script type="text/javascript" src="script/vm/runes.vm.js"></script>
+    <script type="text/javascript" src="script/vm/runes.vm.es3.js"></script>
 </head>
 <body>
     <script type="text/javascript">
         runes.run("var a = 1 + 1");
+        document.write(a);
     </script>
 </body>
 </html>

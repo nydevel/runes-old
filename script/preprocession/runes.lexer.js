@@ -67,10 +67,10 @@
                 var currentLex = undefined;
                 var lastIndex = 0;
                 var resultLexArray = [];
+                var i = 0;
 
-                for (var i = 0; i < charArray.length; i++) {
+                for (i = 0; i < charArray.length; i++) {
                     var matchedLex = getMatchedLex(charArray[i]);
-
                     if (matchedLex) {
                         currentLex = currentLex || matchedLex;
                         if (matchedLex.lexName !== currentLex.lexName) {
@@ -94,13 +94,42 @@
                     }
                 }
 
+                if (matchedLex && currentLex) {
+                    resultLexArray.push({
+                        startIndex: lastIndex,
+                        endIndex: i,
+                        lexName: matchedLex.lexName,
+                        lexSubName: matchedLex.lexSubName,
+                        lexValue: stringToAnalize.substr(lastIndex, i - lastIndex)
+                    });
+                }
+
 
                 return resultLexArray;
             }
         }
 
-        runes.lexer.L = function (lexName, lexDescription) {
-            lexRegistrationArray.push({ "lexName": lexName, "lexDescription": lexDescription });
+        runes.lexer.L = function (lexName, lexDescription, lexValue) {
+            if (typeof lexDescription === "object") {
+                lexRegistrationArray.push({ "lexName": lexName, "lexDescription": lexDescription });
+            } else {
+                var lex = undefined;
+                for (var i = 0; i < lexRegistrationArray.length; i++) {
+                    if (lexRegistrationArray[i].lexName === lexName) {
+                        lexRegistrationArray[i].lexSubName = lexDescription;
+                        lexRegistrationArray[i].lexValue = lexValue;
+                        return lexRegistrationArray[i];
+                    }
+                }
+            }
+        }
+
+        runes.lexer.LD = function (lexName, lexSubName, lexValue) {
+            return {
+                lexName: lexName,
+                lexSubName: lexSubName,
+                lexValue: lexValue
+            }
         }
 
     } else {
