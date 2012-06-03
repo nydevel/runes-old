@@ -15,7 +15,10 @@
 </head>
 <body>
     <script type="text/javascript">
-        runes.run("var a = 1 + 1");
+        runes.onError = function (e) {
+            document.write(e.message);
+        }
+        runes.run("var a = 3 + 1");
         document.write(a);
     </script>
 </body>
