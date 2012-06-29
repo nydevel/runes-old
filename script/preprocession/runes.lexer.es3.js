@@ -25,4 +25,8 @@
         "WHITESPACE": / /
     });
 
+    L("NEXTLINE", {
+        "SEMICOLON" : /;/
+    });
+
 })();

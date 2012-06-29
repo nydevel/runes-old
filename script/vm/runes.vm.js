@@ -8,6 +8,15 @@
             for (var i = 0; i < commandRegistrationArray.length; i++) {
                 if (commandRegistrationArray[i].commandDescription.R === rule.ruleName) {
                     commandRegistrationArray[i].commandDescription.F(runes.vm, rule.ruleLexs);
+                    break;
+                }
+            }
+        }
+
+        var precompileCommand = function (rule) {
+            for (var i = 0; i < commandRegistrationArray.length; i++) {
+                if (commandRegistrationArray[i].commandDescription.R === rule.ruleName) {
+                    return commandRegistrationArray[i].commandDescription.P(runes.vm, rule.ruleLexs);
                 }
             }
         }
@@ -18,7 +27,15 @@
                 for (var i = 0; i < parsedRules.length; i++) {
                     executeCommand(parsedRules[i]);
                 }
-            }
+            },
+            sprint: function (parsedRules, mode) {
+                vm_mode = mode || "onHostDOM";
+                var precompiledCode = "";
+                for (var i = 0; i < parsedRules.length; i++) {
+                    precompiledCode += precompileCommand(parsedRules[i]);
+                }
+                eval(precompiledCode);
+            },
         }
 
         var stack = undefined;

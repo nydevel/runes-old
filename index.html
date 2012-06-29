@@ -15,11 +15,30 @@
 </head>
 <body>
     <script type="text/javascript">
-        runes.onError = function (e) {
-            document.write(e.message);
+        function callAndCount(name, callback) {
+            document.write(name + "<br>");
+            var d = new Date().getTime();
+            for (var i = 0; i < 1000; i++) {
+                callback();
+            }
+            var e = (new Date().getTime() - d);
+            document.write(e / 1000);
+            document.write("ms rep one call :: " + e + "ms per 1000 calls" + "<br>");
         }
-        runes.run("var a = 3 + 1");
-        document.write(a);
+        var error = true;
+        runes.onError = function (e) {
+            if (error) document.write(e.message + "<br>");
+            error = false;
+        }
+        callAndCount("one line - run", function () { runes.run("var ar = 3 + 2;") });
+        callAndCount("one line - sprint", function () { runes.sprint("var as = 3 + 4;") });
+
+        try {
+            document.write("<br>" + ar);
+            document.write("<br>" + as);
+        } catch (e) {
+            document.write("<br>" + e.message);
+        }
     </script>
 </body>
 </html>

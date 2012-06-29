@@ -10,11 +10,15 @@
     });
 
     R("ADDITION", {
-        R1: [L("NUMBER"), L("SPACE"), L("SYMBOL", "ADD"), L("SPACE"), L("NUMBER")]
+        R1: [ L("NUMBER"), L("SPACE"), L("SYMBOL", "ADD"), L("SPACE"), L("NUMBER") ]
     });
 
     R("ASSIGMENT", {
-        R1: [ L("WORD"), L("SPACE"), L("SYMBOL", "ASSIGMENT")]
+        R1: [ L("WORD"), L("SPACE"), L("SYMBOL", "ASSIGMENT") ]
+    });
+
+    R("NEXTLINE", {
+        R1: [ L("NEXTLINE", "SEMICOLON") ]
     });
 
     
